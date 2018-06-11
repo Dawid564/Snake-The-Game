@@ -1,15 +1,15 @@
 package com.snake;
 
+import com.snake.gui.GameGui;
 import com.snake.logic.Run;
+import javafx.application.Application;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )
     {
-        new Run();
+        GameGui gameGui = GameGui.class;
+        Application.launch(new GameGui(), args);
+        new Run(args);
     }
 }

@@ -5,7 +5,7 @@ import com.snake.gui.GameGui;
 public class Run {
 
     public Run(String[] args){
-        //start GUI
-        //new GameGui(args);
+        GameGui gameGui = new GameGui();
+        gameGui.run(args);
     }
 }

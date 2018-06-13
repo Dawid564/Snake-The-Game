@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 
 public class GameGui extends Application{
 
+
     public static void run(String[] args){
         launch(args);
     }

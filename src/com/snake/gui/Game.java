@@ -12,11 +12,14 @@ import javafx.stage.Stage;
 
 public class Game {
 
+    private GraphicsContext gc = null;
+
     public Game(Stage primaryStage){
         primaryStage.setTitle("Snake - Drawing test :D");
         Group root = new Group();
         Canvas canvas = new Canvas(300,250);
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        this.gc = gc;
         drawPolygons(gc);
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
@@ -28,6 +31,10 @@ public class Game {
         gc.setStroke(Color.BLUE);
         gc.setLineWidth(5);
         gc.strokeLine(10,10,40,10);
+
+    }
+
+    public void drawMap(int size){
 
     }
 }

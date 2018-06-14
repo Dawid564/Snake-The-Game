@@ -31,7 +31,6 @@ public class Game {
         gc.setStroke(Color.BLUE);
         gc.setLineWidth(5);
         gc.strokeLine(10,10,40,10);
-
     }
 
     public void drawMap(int size){

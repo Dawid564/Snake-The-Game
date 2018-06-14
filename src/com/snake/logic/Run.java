@@ -5,9 +5,9 @@ import com.snake.gui.GameGui;
 
 public class Run {
     public Run(String[] args){
-        Engine engine = new Engine(20);
-
         GameGui gameGui = new GameGui();
+        Engine engine = new Engine(20, gameGui);
+        gameGui.setEngine(engine);
         gameGui.run(args);
     }
 }

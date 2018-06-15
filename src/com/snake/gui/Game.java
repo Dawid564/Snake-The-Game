@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-
+//game window
 public class Game {
 
     private GraphicsContext gc = null;
@@ -35,5 +35,9 @@ public class Game {
 
     public void drawMap(int size){
 
+    }
+
+    public void drawSnake(){
+        
     }
 }

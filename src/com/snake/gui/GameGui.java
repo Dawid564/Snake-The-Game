@@ -20,6 +20,12 @@ public class GameGui extends Application{
     }
 
     public void setEngine(Engine engine){
-        this.engine = engine;
+        this.game.setEngine(engine);
     }
+
+    public Game getGame(){
+        return this.game;
+    }
+
+
 }

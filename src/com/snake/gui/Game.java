@@ -1,5 +1,6 @@
 package com.snake.gui;
 
+import com.snake.engine.Engine;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 public class Game {
 
     private GraphicsContext gc = null;
+    private Engine engine;
 
     public Game(Stage primaryStage){
         primaryStage.setTitle("Snake - Drawing test :D");
@@ -38,6 +40,10 @@ public class Game {
     }
 
     public void drawSnake(){
-        
+
+    }
+
+    public void setEngine(Engine engine){
+        this.engine = engine;
     }
 }

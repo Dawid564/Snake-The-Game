@@ -1,16 +1,16 @@
 package com.snake.engine;
 
-import com.snake.gui.GameGui;
+import com.snake.gui.Game;
 
 public class Engine {
 
     private int preferSize = 20;
     private int[] map = null;
-    private GameGui gameGui;
+    private Game game;
 
-    public Engine(int preferSize, GameGui gameGui){
+    public Engine(int preferSize, Game game){
         this.preferSize = preferSize;
-        this.gameGui = gameGui;
+        this.game = game;
     }
 
     public void createMap(){

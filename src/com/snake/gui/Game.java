@@ -18,6 +18,7 @@ public class Game {
 
     private void initEngine(){
         Engine engine = new Engine(20, this);
+        this.engine = engine;
     }
 
     public Game(Stage primaryStage){

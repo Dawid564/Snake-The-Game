@@ -11,11 +11,6 @@ public class Engine{
     public Engine(int preferSize, Game game){
         this.preferSize = preferSize;
         this.game = game;
-        if(game == null){
-            System.out.println("game in engine is not null");
-        }else{
-            System.out.println("game in engine is null");
-        }
     }
 
     public void createMap(){

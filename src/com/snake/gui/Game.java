@@ -16,7 +16,12 @@ public class Game {
     private GraphicsContext gc = null;
     private Engine engine;
 
+    private void initEngine(){
+        Engine engine = new Engine(20, this);
+    }
+
     public Game(Stage primaryStage){
+        initEngine();
         primaryStage.setTitle("Snake - Drawing test :D");
         Group root = new Group();
         Canvas canvas = new Canvas(300,250);

@@ -2,7 +2,7 @@ package com.snake.engine;
 
 import com.snake.gui.Game;
 
-public class Engine {
+public class Engine{
 
     private int preferSize = 20;
     private int[] map = null;
@@ -11,10 +11,14 @@ public class Engine {
     public Engine(int preferSize, Game game){
         this.preferSize = preferSize;
         this.game = game;
+        if(game == null){
+            System.out.println("game in engine is not null");
+        }else{
+            System.out.println("game in engine is null");
+        }
     }
 
     public void createMap(){
         this.map = new int[preferSize];
     }
-
 }

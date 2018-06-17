@@ -15,7 +15,7 @@ public class Game {
 
     private GraphicsContext gc = null;
     private Engine engine;
-    private int height = 250;
+    private int height = 300;
     private int width = 300;
 
     private void initEngine(){
@@ -28,13 +28,14 @@ public class Game {
     }
 
     public Game(Stage primaryStage){
-        initEngine();
+
         primaryStage.setTitle("Snake - Drawing test :D");
         Group root = new Group();
         Canvas canvas = new Canvas(width,height);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.gc = gc;
-        drawPolygons(gc);
+        //drawPolygons(gc);
+        initEngine();
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

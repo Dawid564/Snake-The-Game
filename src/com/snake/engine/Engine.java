@@ -1,6 +1,7 @@
 package com.snake.engine;
 
 import com.snake.gui.Game;
+import javafx.scene.canvas.GraphicsContext;
 
 public class Engine{
 
@@ -11,7 +12,22 @@ public class Engine{
     public Engine(int preferSize, Game game){
         this.preferSize = preferSize;
         this.game = game;
+        initialize();
     }
+
+    //initialize components
+    private void initialize(){
+        //draw grid for snake
+        drawGrid();
+    }
+
+
+
+    private void drawGrid(){
+        GraphicsContext gc = game.getGc();
+
+    }
+
 
     public void createMap(){
         this.map = new int[preferSize];

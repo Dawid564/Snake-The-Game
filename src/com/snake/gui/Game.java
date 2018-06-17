@@ -15,17 +15,23 @@ public class Game {
 
     private GraphicsContext gc = null;
     private Engine engine;
+    private int height = 250;
+    private int width = 300;
 
     private void initEngine(){
         Engine engine = new Engine(20, this);
         this.engine = engine;
     }
 
+    public GraphicsContext getGc() {
+        return gc;
+    }
+
     public Game(Stage primaryStage){
         initEngine();
         primaryStage.setTitle("Snake - Drawing test :D");
         Group root = new Group();
-        Canvas canvas = new Canvas(300,250);
+        Canvas canvas = new Canvas(width,height);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.gc = gc;
         drawPolygons(gc);

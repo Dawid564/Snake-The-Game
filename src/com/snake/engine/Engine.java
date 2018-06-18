@@ -26,6 +26,7 @@ public class Engine{
 
 
 
+    //create grid for snake
     private void drawGrid(){
         GraphicsContext gc = game.getGc();
         gc.setFill(Color.BLACK);

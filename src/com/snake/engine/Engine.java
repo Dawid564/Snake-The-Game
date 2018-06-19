@@ -24,6 +24,9 @@ public class Engine{
         drawGrid();
     }
 
+    private void drawSnake(int x1,int y1,int x2,int y2){
+        
+    }
 
 
     //create grid for snake

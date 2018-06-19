@@ -34,18 +34,11 @@ public class Game {
         Canvas canvas = new Canvas(width,height);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.gc = gc;
-        //drawPolygons(gc);
         initEngine();
+
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-    }
-
-    private void drawPolygons(GraphicsContext gc){
-        gc.setFill(Color.RED);
-        gc.setStroke(Color.BLUE);
-        gc.setLineWidth(5);
-        gc.strokeLine(10,10,40,10);
     }
 
     public void drawMap(int size){

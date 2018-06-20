@@ -1,5 +1,6 @@
 package com.snake.gui;
 
+import com.snake.dao.Params;
 import com.snake.engine.Engine;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -18,8 +19,8 @@ public class Game {
     private int height = 300;
     private int width = 300;
 
-    private void initEngine(){
-        Engine engine = new Engine(20, this);
+    private void initEngine(Params params){
+        Engine engine = new Engine(params, this);
         this.engine = engine;
     }
 
@@ -28,17 +29,21 @@ public class Game {
     }
 
     public Game(Stage primaryStage){
-
+        Params params = initParams();
         primaryStage.setTitle("Snake - Drawing test :D");
         Group root = new Group();
-        Canvas canvas = new Canvas(width,height);
+        Canvas canvas = new Canvas(params.getWidth(),params.getHeight());
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.gc = gc;
-        initEngine();
+        initEngine(params);
 
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    private Params initParams(){
+        return new Params(300,300,20);
     }
 
     public void drawMap(int size){

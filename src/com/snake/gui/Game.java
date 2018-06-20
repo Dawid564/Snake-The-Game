@@ -6,8 +6,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -16,8 +14,6 @@ public class Game {
 
     private GraphicsContext gc = null;
     private Engine engine;
-    private int height = 300;
-    private int width = 300;
 
     private void initEngine(Params params){
         Engine engine = new Engine(params, this);
@@ -44,17 +40,5 @@ public class Game {
 
     private Params initParams(){
         return new Params(300,300,20);
-    }
-
-    public void drawMap(int size){
-
-    }
-
-    public void drawSnake(){
-
-    }
-
-    public void setEngine(Engine engine){
-        this.engine = engine;
     }
 }

@@ -8,18 +8,14 @@ import javafx.scene.paint.Color;
 
 public class Engine{
 
-    //private int height = 300;
-    //private int width = 300;
-    //private int preferSize = 20;
     private Params params;
-    private int[] map = null;
+    //private int[] map = null;
     private Game game;
     private int[] coordinateX;
     private int[] coordianteY;
 
     public Engine(Params params, Game game){
         this.params = params;
-        //this.preferSize = preferSize;
         this.game = game;
         initialize();
     }

@@ -1,5 +1,6 @@
 package com.snake.engine;
 
+import com.snake.dao.Snake;
 import com.snake.gui.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -24,8 +25,8 @@ public class Engine{
         drawGrid();
     }
 
-    private void drawSnake(int x1,int y1,int x2,int y2){
-        
+    private void drawSnake(Snake snake){
+
     }
 
 

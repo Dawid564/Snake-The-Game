@@ -26,6 +26,7 @@ public class Engine{
         drawGrid();
     }
 
+    //draw snake
     private void drawSnake(Snake snake){
 
     }

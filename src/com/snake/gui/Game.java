@@ -34,14 +34,22 @@ public class Game {
         initEngine(params);
 
         root.getChildren().add(canvas);
-        primaryStage.setScene(new Scene(root));
+        Scene mainScene = new Scene(root);
+        primaryStage.setScene(mainScene);
         primaryStage.show();
-
+        setUpUserInput(mainScene);
     }
 
-    //set up reaction on arrow clicking 
-    private void setUpUserInput(){
-
+    //set up reaction on arrow clicking
+    private void setUpUserInput(Scene mainScene){
+        mainScene.setOnKeyPressed(event ->{
+            switch (event.getCode()){
+                case UP: System.out.println("up"); break;
+                case DOWN: System.out.println("down"); break;
+                case LEFT: System.out.println("left"); break;
+                case RIGHT: System.out.println("right"); break;
+            }
+        });
     }
 
     private Params initParams(){

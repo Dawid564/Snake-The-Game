@@ -6,6 +6,9 @@ import com.snake.gui.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Engine{
 
     public enum Direction{UP,DOWN,LEFT,RIGHT}
@@ -13,6 +16,7 @@ public class Engine{
     private Game game;
     private int[] coordinateX;
     private int[] coordinateY;
+    private List<Snake> snakeTail;
 
     public Engine(Params params, Game game){
         this.params = params;
@@ -27,7 +31,10 @@ public class Engine{
 
         calculateCoordinates();
 
-        drawSnake(startSnake());
+        snakeTail = new ArrayList<>();
+        Snake snakeHead = startSnake();
+        drawSnake(snakeHead);
+        snakeTail.add(snakeHead);
     }
 
     private Snake startSnake(){
@@ -65,8 +72,60 @@ public class Engine{
 
 
     public void selectDirection(Direction direct){
-
+        switch (direct){
+            case UP: moveUp(); break;
+            case DOWN: moveDown(); break;
+            case LEFT: moveLeft(); break;
+            case RIGHT: moveRight(); break;
+        }
     }
+
+    //find where in array is the actual coordinates of snake
+    private int findIndexY(int coordinates){
+        for(int i=0; i<coordinateY.length; i++){
+            if(coordinates == coordinateY[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int findIndexX(int coordinates){
+        for(int i=0; i<coordinateX.length; i++){
+            if(coordinates == coordinateX[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+
+    private void moveLeft(){
+        int elem = findIndexX(snakeTail.get(0).getX1());
+        snakeTail.get(0).setX1(coordinateY[elem - 1]);
+        drawSnake(snakeTail.get(0));
+    }
+
+    private void moveRight(){
+        int elem = findIndexX(snakeTail.get(0).getX1());
+        snakeTail.get(0).setX1(coordinateX[elem + 1]);
+        drawSnake(snakeTail.get(0));
+    }
+
+    private void moveDown(){
+        int elem = findIndexY(snakeTail.get(0).getY1());
+        snakeTail.get(0).setY1(coordinateY[elem + 1]);
+        drawSnake(snakeTail.get(0));
+    }
+
+    private void moveUp(){
+        int elem = findIndexY(snakeTail.get(0).getY1());
+        snakeTail.get(0).setY1(coordinateY[elem-1]);
+        drawSnake(snakeTail.get(0));
+    }
+
+
 
     //create grid for snake
     private void drawGrid(){

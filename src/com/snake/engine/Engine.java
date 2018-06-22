@@ -8,8 +8,8 @@ import javafx.scene.paint.Color;
 
 public class Engine{
 
+    public enum Direction{UP,DOWN,LEFT,RIGHT}
     private Params params;
-    //private int[] map = null;
     private Game game;
     private int[] coordinateX;
     private int[] coordianteY;
@@ -31,7 +31,13 @@ public class Engine{
 
     }
 
+    //calculate all possible coordinates for snake
     private void calculateCoordinates(){
+
+    }
+
+
+    public void selectDirection(Direction direct){
 
     }
 

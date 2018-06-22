@@ -36,6 +36,12 @@ public class Game {
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+    }
+
+    //set up reaction on arrow clicking 
+    private void setUpUserInput(){
+
     }
 
     private Params initParams(){

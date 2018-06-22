@@ -40,10 +40,17 @@ public class Engine{
 
     //draw snake
     private void drawSnake(Snake s){
-        System.out.println(s.getX1() + " " +  s.getY1() + " " +  s.getX2() + " " +  s.getY2());
         GraphicsContext gc = game.getGc();
         gc.setFill(Color.BLUE);
-        gc.fillRect(s.getX2(), s.getY1(), s.getX1(), s.getY2());
+        gc.fillRect(s.getX1(),s.getY1(),getSnakeWidth(),getSnakeHeight());
+    }
+
+    private int getSnakeHeight(){
+        return coordinateY[1] - coordinateY[0];
+    }
+
+    private int getSnakeWidth(){
+        return coordinateX[1] - coordinateX[0];
     }
 
     //calculate all possible coordinates for snake

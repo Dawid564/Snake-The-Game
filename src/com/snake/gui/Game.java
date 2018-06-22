@@ -44,10 +44,10 @@ public class Game {
     private void setUpUserInput(Scene mainScene){
         mainScene.setOnKeyPressed(event ->{
             switch (event.getCode()){
-                case UP: System.out.println("up"); break;
-                case DOWN: System.out.println("down"); break;
-                case LEFT: System.out.println("left"); break;
-                case RIGHT: System.out.println("right"); break;
+                case UP: engine.selectDirection(Engine.Direction.UP); break;
+                case DOWN: engine.selectDirection(Engine.Direction.DOWN); break;
+                case LEFT: engine.selectDirection(Engine.Direction.LEFT); break;
+                case RIGHT: engine.selectDirection(Engine.Direction.RIGHT); break;
             }
         });
     }

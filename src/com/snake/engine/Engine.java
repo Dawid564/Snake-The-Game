@@ -12,7 +12,7 @@ public class Engine{
     private Params params;
     private Game game;
     private int[] coordinateX;
-    private int[] coordianteY;
+    private int[] coordinateY;
 
     public Engine(Params params, Game game){
         this.params = params;
@@ -24,16 +24,36 @@ public class Engine{
     private void initialize(){
         //draw grid for snake
         drawGrid();
+
+        calculateCoordinates();
+
+        drawSnake(startSnake());
+    }
+
+    private Snake startSnake(){
+        return new Snake(
+                coordinateX[coordinateX.length/2],
+                coordinateY[coordinateY.length/2],
+                coordinateX[(coordinateX.length/2)+1],
+                coordinateY[(coordinateY.length/2)+1]);
     }
 
     //draw snake
-    private void drawSnake(Snake snake){
-
+    private void drawSnake(Snake s){
+        System.out.println(s.getX1() + " " +  s.getY1() + " " +  s.getX2() + " " +  s.getY2());
+        GraphicsContext gc = game.getGc();
+        gc.setFill(Color.BLUE);
+        gc.fillRect(s.getX2(), s.getY1(), s.getX1(), s.getY2());
     }
 
     //calculate all possible coordinates for snake
     private void calculateCoordinates(){
-
+        coordinateX = new int[params.getPreferSize()];
+        coordinateY = new int[params.getPreferSize()];
+        for(int i=0; i<params.getPreferSize(); i++){
+            coordinateY[i] = (params.getHeight()/params.getPreferSize())*i;
+        }
+        coordinateX = coordinateY;
     }
 
 

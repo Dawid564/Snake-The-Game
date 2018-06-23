@@ -89,7 +89,7 @@ public class Engine{
         }
         return -1;
     }
-
+    //TODO add max to operate!!
     private int findIndexX(int coordinates){
         for(int i=0; i<coordinateX.length; i++){
             if(coordinates == coordinateX[i]){
@@ -105,6 +105,7 @@ public class Engine{
         int elem = findIndexX(snakeTail.get(0).getX1());
         snakeTail.get(0).setX1(coordinateY[elem - 1]);
         drawSnake(snakeTail.get(0));
+
     }
 
     private void moveRight(){
@@ -120,9 +121,18 @@ public class Engine{
     }
 
     private void moveUp(){
+        clearMap();
         int elem = findIndexY(snakeTail.get(0).getY1());
-        snakeTail.get(0).setY1(coordinateY[elem-1]);
+        snakeTail.get(0).setY1(coordinateY[elem - 1]);
         drawSnake(snakeTail.get(0));
+
+    }
+
+    //clear and redraw grid
+    //use this always if you need to move object
+    private void clearMap(){
+        game.getGc().clearRect(0,0,params.getWidth(),params.getHeight());
+        drawGrid();
     }
 
 

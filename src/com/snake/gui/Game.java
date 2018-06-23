@@ -14,6 +14,7 @@ public class Game {
 
     private GraphicsContext gc = null;
     private Engine engine;
+    private Canvas canvas;
 
     private void initEngine(Params params){
         Engine engine = new Engine(params, this);
@@ -29,12 +30,14 @@ public class Game {
         primaryStage.setTitle("Snake - Drawing test :D");
         Group root = new Group();
         Canvas canvas = new Canvas(params.getWidth(),params.getHeight());
+        this.canvas = canvas;
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.gc = gc;
         initEngine(params);
 
         root.getChildren().add(canvas);
         Scene mainScene = new Scene(root);
+
         primaryStage.setScene(mainScene);
         primaryStage.show();
         setUpUserInput(mainScene);

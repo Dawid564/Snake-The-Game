@@ -31,7 +31,7 @@ public class Engine{
             }
         };
 
-        public abstract int apply(int x1, int x2);
+        public abstract int apply(int a, int b);
     }
 
     public Engine(Params params, Game game){
@@ -51,6 +51,15 @@ public class Engine{
         Snake snakeHead = startSnake();
         drawSnake(snakeHead);
         snakeTail.add(snakeHead);
+
+        //object of background operations
+        Move move = initAutoMove();
+    }
+
+    private Move initAutoMove(){
+        Move move = new Move();
+        new Thread(move).start();
+        return move;
     }
 
     private Snake startSnake(){
@@ -117,6 +126,7 @@ public class Engine{
 
     private void moveLeftRight(Operator op){
         clearMap();
+        //TODO add snake tail
         int elem = findIndexX(snakeTail.get(0).getX1());
         snakeTail.get(0).setX1(coordinateX[op.apply(elem , 1)]);
         drawSnake(snakeTail.get(0));
@@ -129,7 +139,7 @@ public class Engine{
         drawSnake(snakeTail.get(0));
     }
 
-    //clear and redraw grid
+    //clear objects and redraw grid
     //use this always if you need to move object
     private void clearMap(){
         game.getGc().clearRect(0,0,params.getWidth(),params.getHeight());

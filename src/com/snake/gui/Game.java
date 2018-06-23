@@ -27,7 +27,7 @@ public class Game {
 
     public Game(Stage primaryStage){
         Params params = initParams();
-        primaryStage.setTitle("Snake - Drawing test :D");
+        primaryStage.setTitle("Snake :D");
         Group root = new Group();
         Canvas canvas = new Canvas(params.getWidth(),params.getHeight());
         this.canvas = canvas;

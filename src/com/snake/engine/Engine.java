@@ -17,6 +17,22 @@ public class Engine{
     private int[] coordinateX;
     private int[] coordinateY;
     private List<Snake> snakeTail;
+    public enum Operator{
+        ADD{
+            @Override
+            public int apply (int a, int b){
+                return a + b;
+            }
+        },
+        SUB{
+            @Override
+            public  int apply (int a, int b){
+                return a - b;
+            }
+        };
+
+        public abstract int apply(int x1, int x2);
+    }
 
     public Engine(Params params, Game game){
         this.params = params;
@@ -73,10 +89,10 @@ public class Engine{
 
     public void selectDirection(Direction direct){
         switch (direct){
-            case UP: moveUp(); break;
-            case DOWN: moveDown(); break;
-            case LEFT: moveLeft(); break;
-            case RIGHT: moveRight(); break;
+            case UP: moveUpDown(Operator.SUB); break;
+            case DOWN: moveUpDown(Operator.ADD); break;
+            case LEFT: moveLeftRight(Operator.SUB); break;
+            case RIGHT: moveLeftRight(Operator.ADD); break;
         }
     }
 
@@ -99,33 +115,18 @@ public class Engine{
         return -1;
     }
 
-
-
-    private void moveLeft(){
+    private void moveLeftRight(Operator op){
+        clearMap();
         int elem = findIndexX(snakeTail.get(0).getX1());
-        snakeTail.get(0).setX1(coordinateY[elem - 1]);
-        drawSnake(snakeTail.get(0));
-
-    }
-
-    private void moveRight(){
-        int elem = findIndexX(snakeTail.get(0).getX1());
-        snakeTail.get(0).setX1(coordinateX[elem + 1]);
+        snakeTail.get(0).setX1(coordinateX[op.apply(elem , 1)]);
         drawSnake(snakeTail.get(0));
     }
 
-    private void moveDown(){
-        int elem = findIndexY(snakeTail.get(0).getY1());
-        snakeTail.get(0).setY1(coordinateY[elem + 1]);
-        drawSnake(snakeTail.get(0));
-    }
-
-    private void moveUp(){
+    private void moveUpDown(Operator op){
         clearMap();
         int elem = findIndexY(snakeTail.get(0).getY1());
-        snakeTail.get(0).setY1(coordinateY[elem - 1]);
+        snakeTail.get(0).setY1(coordinateY[op.apply(elem,1)]);
         drawSnake(snakeTail.get(0));
-
     }
 
     //clear and redraw grid

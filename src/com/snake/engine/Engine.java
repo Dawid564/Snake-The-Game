@@ -59,7 +59,7 @@ public class Engine{
     }
 
     private Move initAutoMove(){
-        Move move = new Move(this);
+        Move move = new Move(this ,params);
         new Thread(move).start();
         return move;
     }

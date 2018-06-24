@@ -4,12 +4,22 @@ public class Params {
 
     private int height;
     private int width;
-    private int preferSize;
+    private int preferSize;//count of square in one column
+    private int snakeSpeed;//snake speed in millis
 
-    public Params(int height, int width, int preferSize){
+    public Params(int height, int width, int preferSize, int snakeSpeed){
         this.height = height;
         this.width = width;
         this.preferSize = preferSize;
+        this.snakeSpeed = snakeSpeed;
+    }
+
+    public int getSnakeSpeed() {
+        return snakeSpeed;
+    }
+
+    public void setSnakeSpeed(int snakeSpeed) {
+        this.snakeSpeed = snakeSpeed;
     }
 
     public int getHeight() {

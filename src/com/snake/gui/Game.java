@@ -56,6 +56,6 @@ public class Game {
     }
 
     private Params initParams(){
-        return new Params(300,300,20);
+        return new Params(300,300,20, 500);
     }
 }

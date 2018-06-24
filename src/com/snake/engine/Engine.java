@@ -53,6 +53,16 @@ public class Engine{
         drawSnake(snakeHead);
         snakeTail.add(snakeHead);
 
+        //TODO AFTER TESTS DELETE !
+        Snake snakeHead1 = startSnakeTEST1();
+        drawSnake(snakeHead1);
+        snakeTail.add(snakeHead1);
+
+        //TODO AFTER TESTS DELETE !
+        Snake snakeHead2 = startSnakeTEST2();
+        drawSnake(snakeHead2);
+        snakeTail.add(snakeHead2);
+
         //object of background operations
         Move move = initAutoMove();
         this.move = move;
@@ -68,6 +78,24 @@ public class Engine{
         return new Snake(
                 coordinateX[coordinateX.length/2],
                 coordinateY[coordinateY.length/2],
+                coordinateX[(coordinateX.length/2)+1],
+                coordinateY[(coordinateY.length/2)+1]);
+    }
+
+    //TODO AFTER TEST DELETE!
+    private Snake startSnakeTEST1(){
+        return new Snake(
+                coordinateX[coordinateX.length/2],
+                coordinateY[coordinateY.length/2+1],
+                coordinateX[(coordinateX.length/2)+1],
+                coordinateY[(coordinateY.length/2)+1]);
+    }
+
+    //TODO AFTER TEST DELETE!
+    private Snake startSnakeTEST2(){
+        return new Snake(
+                coordinateX[coordinateX.length/2],
+                coordinateY[coordinateY.length/2+2],
                 coordinateX[(coordinateX.length/2)+1],
                 coordinateY[(coordinateY.length/2)+1]);
     }
@@ -148,8 +176,6 @@ public class Engine{
         game.getGc().clearRect(0,0,params.getWidth(),params.getHeight());
         drawGrid();
     }
-
-
 
     //create grid for snake
     private void drawGrid(){

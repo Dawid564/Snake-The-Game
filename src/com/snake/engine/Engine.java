@@ -12,6 +12,7 @@ import java.util.List;
 public class Engine{
 
     public enum Direction{UP,DOWN,LEFT,RIGHT}
+    private Move move;
     private Params params;
     private Game game;
     private int[] coordinateX;
@@ -54,6 +55,7 @@ public class Engine{
 
         //object of background operations
         Move move = initAutoMove();
+        this.move = move;
     }
 
     private Move initAutoMove(){
@@ -97,6 +99,7 @@ public class Engine{
 
 
     public void selectDirection(Direction direct){
+        move.direct(direct);
         switch (direct){
             case UP: moveUpDown(Operator.SUB); break;
             case DOWN: moveUpDown(Operator.ADD); break;

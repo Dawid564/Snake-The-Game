@@ -164,10 +164,53 @@ public class Engine{
     }
 
     private void moveUpDown(Operator op){
+        List<Snake> snakeTailControl = new ArrayList<>();
+        snakeTailControl = snakeTail;
         clearMap();
+        System.out.println("size of " + snakeTail.size());
+        System.out.println("size of control " + snakeTailControl.size());
+
         int elem = findIndexY(snakeTail.get(0).getY1());
-        snakeTail.get(0).setY1(coordinateY[op.apply(elem,1)]);
-        drawSnake(snakeTail.get(0));
+
+
+        Snake head = snakeTail.get(0); //copy snake head
+
+        for(Snake s : snakeTail){
+            System.out.println("dir " + s.getX1() + " " + s.getY1());
+        }
+        System.out.println("**");
+        Snake firstCarry;
+        Snake secondCarry;
+        firstCarry = snakeTail.get(0);
+        for(int i=0; i<snakeTail.size()-1; i++){
+            secondCarry = snakeTail.get(i+1);
+            snakeTail.set(i+1, firstCarry);
+            firstCarry = secondCarry;
+        }
+
+
+        for(Snake s : snakeTail){
+            System.out.println("dir " + s.getX1() + " " + s.getY1());
+        }
+        /*
+        for(int i=0; i<snakeTail.size()-1; i++){
+            snakeTail.set(i+1, snakeTailControl.get(i));
+        }*/
+
+
+        //snakeTail.get(0).setY1(coordinateY[op.apply(elem,1)]);
+        head.setY1(coordinateY[op.apply(elem,1)]);
+        snakeTail.set(0,head);
+        //
+        //drawSnake(snakeTail.get(0));
+
+
+
+
+        //snakeTail.remove(snakeTail.size()-1);
+        for(Snake s : snakeTail){
+            drawSnake(s);
+        }
     }
 
     //clear objects and redraw grid

@@ -179,6 +179,8 @@ public class Engine{
             System.out.println("dir " + s.getX1() + " " + s.getY1());
         }
         System.out.println("**");
+
+        /*
         Snake firstCarry;
         Snake secondCarry;
         firstCarry = snakeTail.get(0);
@@ -186,6 +188,11 @@ public class Engine{
             secondCarry = snakeTail.get(i+1);
             snakeTail.set(i+1, firstCarry);
             firstCarry = secondCarry;
+        }*/
+
+        for(int i=0; i<snakeTail.size()-1; i++){
+            snakeTail.get(i+1).setX1(snakeTail.get(i).getX1());
+            snakeTail.get(i+1).setY1(snakeTail.get(i).getY1());
         }
 
 
@@ -201,13 +208,8 @@ public class Engine{
         //snakeTail.get(0).setY1(coordinateY[op.apply(elem,1)]);
         head.setY1(coordinateY[op.apply(elem,1)]);
         snakeTail.set(0,head);
-        //
-        //drawSnake(snakeTail.get(0));
 
-
-
-
-        //snakeTail.remove(snakeTail.size()-1);
+        
         for(Snake s : snakeTail){
             drawSnake(s);
         }

@@ -130,10 +130,10 @@ public class Engine{
     public void selectDirection(Direction direct){
         move.direct(direct);
         switch (direct){
-            case UP: moveUpDown(Operator.SUB); break;
-            case DOWN: moveUpDown(Operator.ADD); break;
-            case LEFT: moveLeftRight(Operator.SUB); break;
-            case RIGHT: moveLeftRight(Operator.ADD); break;
+            case UP: moveUpDown(Operator.SUB, Direction.UP); break;
+            case DOWN: moveUpDown(Operator.ADD, Direction.DOWN); break;
+            case LEFT: moveUpDown(Operator.SUB, Direction.LEFT); break;
+            case RIGHT: moveUpDown(Operator.ADD, Direction.RIGHT); break;
         }
     }
 
@@ -156,72 +156,45 @@ public class Engine{
         return -1;
     }
 
-    private void moveLeftRight(Operator op){
-        clearMap();
-        //TODO add snake tail
-        int elem = findIndexX(snakeTail.get(0).getX1());
-        snakeTail.get(0).setX1(coordinateX[op.apply(elem , 1)]);
-        drawSnake(snakeTail.get(0));
-    }
+    private int[][] getVectorList(List<Snake> snakeTailFun){
+        int[][] vectors = new int[snakeTailFun.size()-1][2];
 
-    private void moveUpDown(Operator op){
-        //List<Snake> snakeTailControl = new ArrayList<>(snakeTail);
-        //List<Snake> snakeTailControl = snakeTail.stream().collect(Collectors.toList());
-        List<Snake> snakeTailControl = new ArrayList<>();
-        for(Snake s : snakeTail){
-            snakeTailControl.add(s);
-        }
-        clearMap();
-        System.out.println("size of " + snakeTail.size());
-        System.out.println("size of control " + snakeTailControl.size());
-
-        int elem = findIndexY(snakeTail.get(0).getY1());
-
-
-        Snake head = snakeTail.get(0); //copy snake head
-
-        for(Snake s : snakeTail){
-            System.out.println("dir " + s.getX1() + " " + s.getY1());
-        }
-        System.out.println("**");
-
-        /*
-        Snake firstCarry;
-        Snake secondCarry;
-        firstCarry = snakeTail.get(0);
-        for(int i=0; i<snakeTail.size()-1; i++){
-            secondCarry = snakeTail.get(i+1);
-            snakeTail.set(i+1, firstCarry);
-            firstCarry = secondCarry;
-        }*/
-        int[][] vectors = new int[snakeTail.size()-1][2];
-        System.out.println("vactor len " +  vectors.length);
-
+        //fill vectors
         for (int i=0; i<snakeTail.size()-1; i++){
             vectors[i][0] = snakeTail.get(i).getX1();
             vectors[i][1] = snakeTail.get(i).getY1();
         }
 
+        return vectors;
+    }
+
+    private void moveUpDown(Operator op, Direction direction){
+        clearMap();
+        int elem;
+        if(Direction.LEFT.equals(direction) || Direction.RIGHT.equals(direction)){
+            elem = findIndexX(snakeTail.get(0).getX1());
+        }else{
+            elem = findIndexY(snakeTail.get(0).getY1());
+        }
+        Snake head = snakeTail.get(0); //copy snake head
+
+        //vectors for every snake element
+        int[][] vectors = getVectorList(snakeTail);
+
+        //update snake
         for(int i=0; i<snakeTail.size()-1; i++){
             snakeTail.get(i+1).setX1(vectors[i][0]);
             snakeTail.get(i+1).setY1(vectors[i][1]);
         }
 
-
-        for(Snake s : snakeTail){
-            System.out.println("dir " + s.getX1() + " " + s.getY1());
+        //update snake head
+        if(Direction.LEFT.equals(direction) || Direction.RIGHT.equals(direction)){
+            head.setX1(coordinateY[op.apply(elem,1)]);
+        }else{
+            head.setY1(coordinateY[op.apply(elem,1)]);
         }
-        /*
-        for(int i=0; i<snakeTail.size()-1; i++){
-            snakeTail.set(i+1, snakeTailControl.get(i));
-        }*/
 
-
-        //snakeTail.get(0).setY1(coordinateY[op.apply(elem,1)]);
-        head.setY1(coordinateY[op.apply(elem,1)]);
         snakeTail.set(0,head);
-
-
         for(Snake s : snakeTail){
             drawSnake(s);
         }

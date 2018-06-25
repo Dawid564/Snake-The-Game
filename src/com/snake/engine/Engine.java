@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Engine{
 
@@ -164,8 +165,12 @@ public class Engine{
     }
 
     private void moveUpDown(Operator op){
+        //List<Snake> snakeTailControl = new ArrayList<>(snakeTail);
+        //List<Snake> snakeTailControl = snakeTail.stream().collect(Collectors.toList());
         List<Snake> snakeTailControl = new ArrayList<>();
-        snakeTailControl = snakeTail;
+        for(Snake s : snakeTail){
+            snakeTailControl.add(s);
+        }
         clearMap();
         System.out.println("size of " + snakeTail.size());
         System.out.println("size of control " + snakeTailControl.size());
@@ -189,10 +194,17 @@ public class Engine{
             snakeTail.set(i+1, firstCarry);
             firstCarry = secondCarry;
         }*/
+        int[][] vectors = new int[snakeTail.size()-1][2];
+        System.out.println("vactor len " +  vectors.length);
+
+        for (int i=0; i<snakeTail.size()-1; i++){
+            vectors[i][0] = snakeTail.get(i).getX1();
+            vectors[i][1] = snakeTail.get(i).getY1();
+        }
 
         for(int i=0; i<snakeTail.size()-1; i++){
-            snakeTail.get(i+1).setX1(snakeTail.get(i).getX1());
-            snakeTail.get(i+1).setY1(snakeTail.get(i).getY1());
+            snakeTail.get(i+1).setX1(vectors[i][0]);
+            snakeTail.get(i+1).setY1(vectors[i][1]);
         }
 
 
@@ -209,7 +221,7 @@ public class Engine{
         head.setY1(coordinateY[op.apply(elem,1)]);
         snakeTail.set(0,head);
 
-        
+
         for(Snake s : snakeTail){
             drawSnake(s);
         }

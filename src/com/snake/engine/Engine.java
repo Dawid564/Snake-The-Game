@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Engine{
 
@@ -130,10 +129,10 @@ public class Engine{
     public void selectDirection(Direction direct){
         move.direct(direct);
         switch (direct){
-            case UP: moveUpDown(Operator.SUB, Direction.UP); break;
-            case DOWN: moveUpDown(Operator.ADD, Direction.DOWN); break;
-            case LEFT: moveUpDown(Operator.SUB, Direction.LEFT); break;
-            case RIGHT: moveUpDown(Operator.ADD, Direction.RIGHT); break;
+            case UP: moveSnakeHead(Operator.SUB, Direction.UP); break;
+            case DOWN: moveSnakeHead(Operator.ADD, Direction.DOWN); break;
+            case LEFT: moveSnakeHead(Operator.SUB, Direction.LEFT); break;
+            case RIGHT: moveSnakeHead(Operator.ADD, Direction.RIGHT); break;
         }
     }
 
@@ -168,14 +167,20 @@ public class Engine{
         return vectors;
     }
 
-    private void moveUpDown(Operator op, Direction direction){
-        clearMap();
+    private int getSnakeElement(Direction direction){
         int elem;
         if(Direction.LEFT.equals(direction) || Direction.RIGHT.equals(direction)){
             elem = findIndexX(snakeTail.get(0).getX1());
         }else{
             elem = findIndexY(snakeTail.get(0).getY1());
         }
+
+        return elem;
+    }
+
+    private void moveSnakeHead(Operator op, Direction direction){
+        clearMap();
+        int elem = getSnakeElement(direction);
         Snake head = snakeTail.get(0); //copy snake head
 
         //vectors for every snake element

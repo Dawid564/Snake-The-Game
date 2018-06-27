@@ -177,7 +177,7 @@ public class Engine{
 
         return elem;
     }
-    
+
     private void moveSnakeHead(Operator op, Direction direction){
         clearMap();
         int elem = getSnakeElement(direction);

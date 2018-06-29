@@ -66,6 +66,16 @@ public class Engine{
         //object of background operations
         Move move = initAutoMove();
         this.move = move;
+
+        //SnakeFood snakeFood = new SnakeFood(coordinateX,coordinateY,snakeTail);
+
+
+    }
+
+    private void setUpFood(){
+        SnakeFood snakeFood = new SnakeFood();
+        int[] coord = snakeFood.initFood(coordinateX,coordinateY,snakeTail);
+        //draw food
     }
 
     private Move initAutoMove(){

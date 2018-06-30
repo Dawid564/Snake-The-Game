@@ -74,7 +74,7 @@ public class Engine{
 
     private void setUpFood(){
         SnakeFood snakeFood = new SnakeFood();
-        int[] coord = snakeFood.initFood(coordinateX,coordinateY,snakeTail);
+        int[] coord = snakeFood.initFood(coordinateX,coordinateY,snakeTail, params);
         //draw food
     }
 

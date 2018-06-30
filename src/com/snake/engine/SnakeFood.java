@@ -1,5 +1,6 @@
 package com.snake.engine;
 
+import com.snake.dao.Params;
 import com.snake.dao.Snake;
 
 import java.util.List;
@@ -9,18 +10,18 @@ public class SnakeFood {
 
     private Random rand;
     private enum Axis{X,Y}
+    private Params params;
 
-    public int[] initFood(int[] x, int[] y, List<Snake> snakeTail){
+    public int[] initFood(int[] x, int[] y, List<Snake> snakeTail, Params params){
+        this.params = params;
         int lenOfMap = convertToNum(x,y);
         int[] excludes = calculateExclude(x,y,snakeTail);
         return null;
     }
 
     private int[] calculateExclude(int[] x, int[] y, List<Snake> snakeTail){
-        System.out.println("snake size " + snakeTail.size());
         int[] excludes = new int[snakeTail.size()];
         for(int i=0; i<snakeTail.size(); i++){
-            System.out.println("test");
             excludes[i] = calcExcludePos(findIndex(x,snakeTail.get(i),Axis.X), findIndex(y,snakeTail.get(i),Axis.Y),x,y);
 
         }
@@ -28,29 +29,21 @@ public class SnakeFood {
     }
 
     private int calcExcludePos(int a, int b, int[] x, int[] y){
-        getElemLocalization(getArrayPosition(a, Axis.X, x), getArrayPosition(b,Axis.Y, y));
+        getElemLocalization(getArrayPosition(a, x), getArrayPosition(b, y));
         return 0;
     }
 
+    //convert input into one number representation
     private int getElemLocalization(int a, int b){
-        System.out.println(a + " "  + b);
-        return -1;
+        int convert = (a*params.getPreferSize()) + b;
+        return convert;
     }
 
-    private int getArrayPosition(int a, Axis axis, int[] coordinate){
-        switch (axis){
-            case X:
-                for (int i=0; i<coordinate.length-1; i++){
-                    if(coordinate[i] == a){
-                        return i;
-                    }
-                }
-                break;
-            case Y: for (int i=0; i<coordinate.length-1; i++){
-                if(coordinate[i] == a){
-                    return i;
-                }
-            } break;
+    private int getArrayPosition(int a, int[] coordinate){
+        for (int i=0; i<coordinate.length-1; i++){
+            if(coordinate[i] == a){
+                return i;
+            }
         }
         return -998;
     }

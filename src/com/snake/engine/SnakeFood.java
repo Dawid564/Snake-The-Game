@@ -18,9 +18,9 @@ public class SnakeFood {
     }
 
     public int[] initFood(int[] x, int[] y, List<Snake> snakeTail){
-        int lenOfMap = convertToNum(x,y);
-        int[] excludes = calculateExclude(x,y,snakeTail);
-        return null;
+        //int lenOfMap = convertToNum(x,y);
+        int[] coordinates = calculateExclude(x,y,snakeTail);
+        return coordinates;
     }
 
     private int[] calculateExclude(int[] x, int[] y, List<Snake> snakeTail){
@@ -31,30 +31,31 @@ public class SnakeFood {
         }
 
         //random choose with exclude list
-        getCoordinate(excludes);
-        System.out.println("dupa");
-        return null; //
+        return getCoordinate(excludes); //
     }
 
     private int[] getCoordinate(int[] excludes){
         int food = nextIntExclude(params.getPreferSize()*params.getPreferSize(), excludes);
-        System.out.println("food " + food);
-        return convertIntIntCoord(food);
+        return convertIntIntoCoord(food);
     }
 
     //return coordinate representation of food
-    private int[] convertIntIntCoord(int food){
+    private int[] convertIntIntoCoord(int food){
         int y = 0;
+        int x = 0;
         for(int i=0; i<401; i = i + 20){
             if(i<food){
-                System.out.println("dupa_wololo " + i);
                 y = i;
             }
         }
-
-        y = y/20;
-        System.out.println("right y " + y);
-        return null;
+        x = (food - y) - 1;
+        y = (y/20) - 1;
+        //System.out.println("right y " + y);
+        //System.out.println("right y " + x);
+        int[] coordinates = new int[2];
+        coordinates[0] = x;
+        coordinates[1] = y;
+        return coordinates;
     }
 
     private int nextIntExclude(int end, int... excludes){
@@ -82,7 +83,6 @@ public class SnakeFood {
     //convert input into one number representation
     private int getElemLocalization(int a, int b){
         int convert = (b*params.getPreferSize()) + a;
-        System.out.println("convert " + convert);
         return convert;
     }
 

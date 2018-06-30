@@ -17,6 +17,7 @@ public class Engine{
     private Game game;
     private int[] coordinateX;
     private int[] coordinateY;
+    private int[] foodCoordinates;
     private List<Snake> snakeTail;
     public enum Operator{
         ADD{
@@ -75,8 +76,15 @@ public class Engine{
     private void setUpFood(){
         SnakeFood snakeFood = new SnakeFood();
         snakeFood.setUpParams(params);
-        int[] coord = snakeFood.initFood(coordinateX,coordinateY,snakeTail);
+        this.foodCoordinates = snakeFood.initFood(coordinateX,coordinateY,snakeTail);
         //draw food
+        drawSnakeFood(this.foodCoordinates);
+    }
+
+    private void drawSnakeFood(int[] coordinates){
+        GraphicsContext gc = game.getGc();
+        gc.setFill(Color.RED);
+        gc.fillRect(coordinateX[coordinates[0]],coordinateY[coordinates[1]],getSnakeWidth(),getSnakeHeight());
     }
 
     private Move initAutoMove(){
@@ -191,6 +199,7 @@ public class Engine{
 
     private void moveSnakeHead(Operator op, Direction direction){
         clearMap();
+
         int elem = getSnakeElement(direction);
         Snake head = snakeTail.get(0); //copy snake head
 
@@ -221,6 +230,7 @@ public class Engine{
     private void clearMap(){
         game.getGc().clearRect(0,0,params.getWidth(),params.getHeight());
         drawGrid();
+        drawSnakeFood(this.foodCoordinates);
     }
 
     //create grid for snake

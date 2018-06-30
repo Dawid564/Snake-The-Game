@@ -12,8 +12,11 @@ public class SnakeFood {
     private enum Axis{X,Y}
     private Params params;
 
-    public int[] initFood(int[] x, int[] y, List<Snake> snakeTail, Params params){
+    public void setUpParams(Params params){
         this.params = params;
+    }
+
+    public int[] initFood(int[] x, int[] y, List<Snake> snakeTail){
         int lenOfMap = convertToNum(x,y);
         int[] excludes = calculateExclude(x,y,snakeTail);
         return null;
@@ -25,12 +28,18 @@ public class SnakeFood {
             excludes[i] = calcExcludePos(findIndex(x,snakeTail.get(i),Axis.X), findIndex(y,snakeTail.get(i),Axis.Y),x,y);
 
         }
+
+        //random choose with exclude list
+        return getCoodrinate(excludes);
+    }
+    
+    private int[] getCoodrinate(int[] excludes){
+
         return null;
     }
 
     private int calcExcludePos(int a, int b, int[] x, int[] y){
-        getElemLocalization(getArrayPosition(a, x), getArrayPosition(b, y));
-        return 0;
+        return getElemLocalization(getArrayPosition(a, x), getArrayPosition(b, y));
     }
 
     //convert input into one number representation

@@ -6,9 +6,10 @@ import com.snake.dao.Snake;
 import java.util.List;
 import java.util.Random;
 
+
 public class SnakeFood {
 
-    private Random rand;
+    private Random rand = new Random();
     private enum Axis{X,Y}
     private Params params;
 
@@ -30,20 +31,34 @@ public class SnakeFood {
         }
 
         //random choose with exclude list
-        return null; //getCoodrinate(excludes);
+        getCoordinate(excludes);
+        System.out.println("dupa");
+        return null; //
     }
 
-    private int[] getCoodrinate(int[] excludes){
-        nextIntExclude(params.getPreferSize()*params.getPreferSize(), excludes);
+    private int[] getCoordinate(int[] excludes){
+        int food = nextIntExclude(params.getPreferSize()*params.getPreferSize(), excludes);
+        System.out.println("food " + food);
+        return convertIntIntCoord(food);
+    }
+
+    //return coordinate representation of food
+    private int[] convertIntIntCoord(int food){
+        int y = 0;
+        for(int i=0; i<401; i = i + 20){
+            if(i<food){
+                System.out.println("dupa_wololo " + i);
+                y = i;
+            }
+        }
+
+        y = y/20;
+        System.out.println("right y " + y);
         return null;
     }
 
-    private int convertIntIntCoord(){
-        return -1;
-    }
-
     private int nextIntExclude(int end, int... excludes){
-        int randomInt = rand.nextInt(end);
+        int randomInt = this.rand.nextInt(end);
         boolean looking = false;
         while(true){
             for(int i=0; i<excludes.length; i++){
@@ -53,7 +68,7 @@ public class SnakeFood {
             }
             //if found duplicate in excludes
             if(looking){
-                randomInt = rand.nextInt(end);
+                randomInt = this.rand.nextInt(end);
             }else{
                 return randomInt;
             }

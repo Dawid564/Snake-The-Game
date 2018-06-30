@@ -30,12 +30,34 @@ public class SnakeFood {
         }
 
         //random choose with exclude list
-        return getCoodrinate(excludes);
+        return null; //getCoodrinate(excludes);
     }
-    
-    private int[] getCoodrinate(int[] excludes){
 
+    private int[] getCoodrinate(int[] excludes){
+        nextIntExclude(params.getPreferSize()*params.getPreferSize(), excludes);
         return null;
+    }
+
+    private int convertIntIntCoord(){
+        return -1;
+    }
+
+    private int nextIntExclude(int end, int... excludes){
+        int randomInt = rand.nextInt(end);
+        boolean looking = false;
+        while(true){
+            for(int i=0; i<excludes.length; i++){
+                if(excludes[i] == randomInt){
+                    looking = true;
+                }
+            }
+            //if found duplicate in excludes
+            if(looking){
+                randomInt = rand.nextInt(end);
+            }else{
+                return randomInt;
+            }
+        }
     }
 
     private int calcExcludePos(int a, int b, int[] x, int[] y){
@@ -44,7 +66,8 @@ public class SnakeFood {
 
     //convert input into one number representation
     private int getElemLocalization(int a, int b){
-        int convert = (a*params.getPreferSize()) + b;
+        int convert = (b*params.getPreferSize()) + a;
+        System.out.println("convert " + convert);
         return convert;
     }
 

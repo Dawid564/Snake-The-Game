@@ -68,7 +68,7 @@ public class Engine{
         this.move = move;
 
         //SnakeFood snakeFood = new SnakeFood(coordinateX,coordinateY,snakeTail);
-
+        setUpFood();
 
     }
 

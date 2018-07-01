@@ -19,7 +19,7 @@ public class Move implements Runnable {
 
     @Override
     public void run() {
-        //autoMove();
+        autoMove();
     }
 
     public void autoMove(){

@@ -15,6 +15,7 @@ public class Engine{
     private Move move;
     private Params params;
     private Game game;
+    private SnakeFood snakeFood;
     private int[] coordinateX;
     private int[] coordinateY;
     private int[] foodCoordinates;
@@ -76,9 +77,9 @@ public class Engine{
     private void setUpFood(){
         SnakeFood snakeFood = new SnakeFood();
         snakeFood.setUpParams(params);
-        this.foodCoordinates = snakeFood.initFood(coordinateX,coordinateY,snakeTail);
+        foodCoordinates = snakeFood.initFood(coordinateX,coordinateY,snakeTail);
         //draw food
-        drawSnakeFood(this.foodCoordinates);
+        drawSnakeFood(foodCoordinates);
     }
 
     private void drawSnakeFood(int[] coordinates){
@@ -230,7 +231,10 @@ public class Engine{
     //if found food
     private void addSnake(){
         if(snakeTail.get(0).getX1() == coordinateX[foodCoordinates[0]] && snakeTail.get(0).getY1() == coordinateY[foodCoordinates[1]]){
-
+            Snake snakeModern = new Snake(snakeTail.get(snakeTail.size()-1).getX1(), snakeTail.get(snakeTail.size()-1).getY1(), 0,0);
+            snakeTail.add(snakeModern);
+            System.out.println("ile razy to sie wykonuje xD");
+            setUpFood();
         }
     }
 

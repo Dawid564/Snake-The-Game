@@ -42,16 +42,16 @@ public class SnakeFood {
     //return coordinate representation of food
     private int[] convertIntIntoCoord(int food){
         int y = 0;
-        int x = 0;
-        for(int i=0; i<401; i = i + 20){
+        int x;
+        for(int i=0; i<400; i = i + 20){
             if(i<food){
                 y = i;
             }
         }
         x = (food - y) - 1;
         y = (y/20) - 1;
-        //System.out.println("right y " + y);
-        //System.out.println("right y " + x);
+        System.out.println("right y " + y);
+        System.out.println("right x " + x);
         int[] coordinates = new int[2];
         coordinates[0] = x;
         coordinates[1] = y;

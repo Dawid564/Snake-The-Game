@@ -223,6 +223,15 @@ public class Engine{
         for(Snake s : snakeTail){
             drawSnake(s);
         }
+        addSnake();
+
+    }
+
+    //if found food
+    private void addSnake(){
+        if(snakeTail.get(0).getX1() == coordinateX[foodCoordinates[0]] && snakeTail.get(0).getY1() == coordinateY[foodCoordinates[1]]){
+
+        }
     }
 
     //clear objects and redraw grid

@@ -3,6 +3,7 @@ package com.snake.engine;
 import com.snake.dao.Params;
 import com.snake.dao.Snake;
 import com.snake.gui.Game;
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -79,13 +80,15 @@ public class Engine{
         snakeFood.setUpParams(params);
         foodCoordinates = snakeFood.initFood(coordinateX,coordinateY,snakeTail);
         //draw food
-        drawSnakeFood(foodCoordinates);
+        Platform.runLater(() ->
+            drawSnakeFood(foodCoordinates));
     }
 
     private void drawSnakeFood(int[] coordinates){
         GraphicsContext gc = game.getGc();
         gc.setFill(Color.RED);
         gc.fillRect(coordinateX[coordinates[0]],coordinateY[coordinates[1]],getSnakeWidth(),getSnakeHeight());
+
     }
 
     private Move initAutoMove(){
@@ -199,7 +202,10 @@ public class Engine{
     }
 
     private void moveSnakeHead(Operator op, Direction direction){
-        clearMap();
+        Platform.runLater(() ->
+                clearMap()
+        );
+
 
         int elem = getSnakeElement(direction);
         Snake head = snakeTail.get(0); //copy snake head
@@ -222,8 +228,11 @@ public class Engine{
         }
 
         snakeTail.set(0,head);
+
         for(Snake s : snakeTail){
-            drawSnake(s);
+            Platform.runLater(() ->
+                    drawSnake(s)
+            );
         }
         addSnake();
 

@@ -18,9 +18,26 @@ public class SnakeFood {
     }
 
     public int[] initFood(int[] x, int[] y, List<Snake> snakeTail){
-        //int lenOfMap = convertToNum(x,y);
         int[] coordinates = calculateExclude(x,y,snakeTail);
-        return coordinates;
+        return corrector(coordinates);
+    }
+
+    private int[] corrector(int[] testData){
+        for (int i=0; i<2; i++){
+            if(testData[0] == -1){
+                testData[0] = 0;
+            }
+            if(testData[1] == -1){
+                testData[1] = 0;
+            }
+            if(testData[0] == 21){
+                testData[0] = 20;
+            }
+            if(testData[1] == 21){
+                testData[1] = 20;
+            }
+        }
+        return testData;
     }
 
     private int[] calculateExclude(int[] x, int[] y, List<Snake> snakeTail){

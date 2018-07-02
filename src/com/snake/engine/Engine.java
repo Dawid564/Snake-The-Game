@@ -217,6 +217,7 @@ public class Engine{
         if(Direction.LEFT.equals(direction) || Direction.RIGHT.equals(direction)){
             head.setX1(coordinateY[op.apply(elem,1)]);
         }else{
+            System.out.println("elem " + elem);
             head.setY1(coordinateY[op.apply(elem,1)]);
         }
 
@@ -233,7 +234,6 @@ public class Engine{
         if(snakeTail.get(0).getX1() == coordinateX[foodCoordinates[0]] && snakeTail.get(0).getY1() == coordinateY[foodCoordinates[1]]){
             Snake snakeModern = new Snake(snakeTail.get(snakeTail.size()-1).getX1(), snakeTail.get(snakeTail.size()-1).getY1(), 0,0);
             snakeTail.add(snakeModern);
-            System.out.println("ile razy to sie wykonuje xD");
             setUpFood();
         }
     }

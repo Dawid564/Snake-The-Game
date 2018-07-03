@@ -219,12 +219,28 @@ public class Engine{
             snakeTail.get(i+1).setY1(vectors[i][1]);
         }
 
+        if(elem == 20 || elem == -1){
+            System.out.println("error");
+        }
+
         //update snake head
         if(Direction.LEFT.equals(direction) || Direction.RIGHT.equals(direction)){
-            head.setX1(coordinateY[op.apply(elem,1)]);
+            int tmpCoordinates = op.apply(elem,1);
+            System.out.println("elem it true " + elem);
+            if(tmpCoordinates == 20 || tmpCoordinates == -1){
+                System.out.println("error2");
+            }else{
+                head.setX1(coordinateY[tmpCoordinates]);
+            }
+
         }else{
             System.out.println("elem " + elem);
-            head.setY1(coordinateY[op.apply(elem,1)]);
+            int tmpCoordinates = op.apply(elem,1);
+            if ( tmpCoordinates == -1 || tmpCoordinates == 20){
+                System.out.println("error1");
+            }else{
+                head.setY1(coordinateY[tmpCoordinates]);
+            }
         }
 
         snakeTail.set(0,head);

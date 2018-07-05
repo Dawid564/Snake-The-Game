@@ -45,7 +45,6 @@ public class Engine{
     }
 
     //initialize components
-    
     private void initialize(){
         //draw grid for snake
         drawGrid();

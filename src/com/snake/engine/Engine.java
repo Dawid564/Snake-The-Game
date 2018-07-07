@@ -14,6 +14,7 @@ import java.util.List;
 public class Engine{
 
     public enum Direction{UP,DOWN,LEFT,RIGHT}
+    private boolean blockMoveFlag = true;
     private Move move;
     private Params params;
     private Game game;
@@ -151,6 +152,66 @@ public class Engine{
         return -1;
     }
 
+    private void moveSnakeHead(Operator op, Direction direction){
+        if(blockMoveFlag){
+            Platform.runLater(() ->
+                    clearMap()
+            );
+
+
+            int elem = getSnakeElement(direction);
+            Snake head = snakeTail.get(0); //copy snake head
+
+            //vectors for every snake element
+            int[][] vectors = getVectorList(snakeTail);
+
+            //update snake
+            for(int i=0; i<snakeTail.size()-1; i++){
+                snakeTail.get(i+1).setX1(vectors[i][0]);
+                snakeTail.get(i+1).setY1(vectors[i][1]);
+            }
+
+            if(elem == 20 || elem == -1){
+                System.out.println("error");
+            }
+
+            //update snake head
+            if(Direction.LEFT.equals(direction) || Direction.RIGHT.equals(direction)){
+                int tmpCoordinates = op.apply(elem,1);
+                System.out.println("elem it true " + elem);
+                if(tmpCoordinates == 20 || tmpCoordinates == -1){
+                    blockMoveFlag = false;
+                    Platform.runLater(() ->
+                            new GameOver()
+                    );
+                }else{
+                    head.setX1(coordinateY[tmpCoordinates]);
+                }
+
+            }else{
+                System.out.println("elem " + elem);
+                int tmpCoordinates = op.apply(elem,1);
+                if ( tmpCoordinates == -1 || tmpCoordinates == 20){
+                    blockMoveFlag = false;
+                    Platform.runLater(() ->
+                            new GameOver()
+                    );
+                }else{
+                    head.setY1(coordinateY[tmpCoordinates]);
+                }
+            }
+
+            snakeTail.set(0,head);
+
+            for(Snake s : snakeTail){
+                Platform.runLater(() ->
+                        drawSnake(s)
+                );
+            }
+            addSnake();
+        }
+    }
+
     private int[][] getVectorList(List<Snake> snakeTailFun){
         int[][] vectors = new int[snakeTailFun.size()-1][2];
 
@@ -172,63 +233,6 @@ public class Engine{
         }
 
         return elem;
-    }
-
-    private void moveSnakeHead(Operator op, Direction direction){
-        Platform.runLater(() ->
-                clearMap()
-        );
-
-
-        int elem = getSnakeElement(direction);
-        Snake head = snakeTail.get(0); //copy snake head
-
-        //vectors for every snake element
-        int[][] vectors = getVectorList(snakeTail);
-
-        //update snake
-        for(int i=0; i<snakeTail.size()-1; i++){
-            snakeTail.get(i+1).setX1(vectors[i][0]);
-            snakeTail.get(i+1).setY1(vectors[i][1]);
-        }
-
-        if(elem == 20 || elem == -1){
-            System.out.println("error");
-        }
-
-        //update snake head
-        if(Direction.LEFT.equals(direction) || Direction.RIGHT.equals(direction)){
-            int tmpCoordinates = op.apply(elem,1);
-            System.out.println("elem it true " + elem);
-            if(tmpCoordinates == 20 || tmpCoordinates == -1){
-                Platform.runLater(() ->
-                        new GameOver()
-                );
-            }else{
-                head.setX1(coordinateY[tmpCoordinates]);
-            }
-
-        }else{
-            System.out.println("elem " + elem);
-            int tmpCoordinates = op.apply(elem,1);
-            if ( tmpCoordinates == -1 || tmpCoordinates == 20){
-                Platform.runLater(() ->
-                        new GameOver()
-                );
-            }else{
-                head.setY1(coordinateY[tmpCoordinates]);
-            }
-        }
-
-        snakeTail.set(0,head);
-
-        for(Snake s : snakeTail){
-            Platform.runLater(() ->
-                    drawSnake(s)
-            );
-        }
-        addSnake();
-
     }
 
     //if found food

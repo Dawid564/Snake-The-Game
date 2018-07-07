@@ -3,6 +3,7 @@ package com.snake.engine;
 import com.snake.dao.Params;
 import com.snake.dao.Snake;
 import com.snake.gui.Game;
+import com.snake.gui.GameOver;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -200,7 +201,9 @@ public class Engine{
             int tmpCoordinates = op.apply(elem,1);
             System.out.println("elem it true " + elem);
             if(tmpCoordinates == 20 || tmpCoordinates == -1){
-                System.out.println("error2");
+                Platform.runLater(() ->
+                        new GameOver()
+                );
             }else{
                 head.setX1(coordinateY[tmpCoordinates]);
             }
@@ -209,7 +212,9 @@ public class Engine{
             System.out.println("elem " + elem);
             int tmpCoordinates = op.apply(elem,1);
             if ( tmpCoordinates == -1 || tmpCoordinates == 20){
-                System.out.println("error1");
+                Platform.runLater(() ->
+                        new GameOver()
+                );
             }else{
                 head.setY1(coordinateY[tmpCoordinates]);
             }
